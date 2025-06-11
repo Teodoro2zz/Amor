@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para Meu Amor 💗</title>
+    <link rel="stylesheet" href="styles/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Overlay inicial -->
+    <div id="overlay-botao">
+        <span class="coracao-overlay" style="left:10vw; animation-delay:0s;">💗</span>
+        <span class="coracao-overlay" style="left:30vw; animation-delay:1s;">💖</span>
+        <span class="coracao-overlay" style="left:50vw; animation-delay:2s;">💞</span>
+        <span class="coracao-overlay" style="left:70vw; animation-delay:3s;">💘</span>
+        <span class="coracao-overlay" style="left:85vw; animation-delay:4s;">💝</span>
+        <div class="frase-inicial">
+            Bem-vinda, meu amor! 💖<br>Prepare-se para uma surpresa especial...
+        </div>
+        <button id="play-music-btn">
+            <img src="assets/fotos/botao.png" alt="Clique aqui Amor💗" style="width:120px;height:120px;">
+            <br>
+            <span>Clique aqui Amor💗</span>
+        </button>
+    </div>
+
+    <!-- Suspense -->
+   <div id="overlay-suspense" style="display:none;">
+    <div class="suspense-box">
+        <p>Tem certeza que quer ver a surpresa? 😏</p>
+        <p style="font-size:1.1rem; color:#e60073; margin-bottom:10px;">
+            (Prometo que vale a pena! 😍)
+        </p>
+        <div class="botoes-suspense">
+        <button id="confirmar-btn">Sim</button>
+        <button id="nao-btn">Não</button>
+    </div>
+</div>
+    <span class="coracao-overlay" style="left:12vw; animation-delay:0s;">💗</span>
+    <span class="coracao-overlay" style="left:28vw; animation-delay:1s;">💖</span>
+    <span class="coracao-overlay" style="left:55vw; animation-delay:2s;">💞</span>
+    <span class="coracao-overlay" style="left:72vw; animation-delay:3s;">💘</span>
+    <span class="coracao-overlay" style="left:88vw; animation-delay:4s;">💝</span>
+</div>
+        </div>
+    </div>
+
+    <!-- Música -->
+    <audio id="background-music" src="assets/music/musica.mp3" loop></audio>
+
+    <!-- Conteúdo principal -->
+    <div id="conteudo-site" style="display:none;">
+        <header>
+            <h1>Para Meu Amor 💗</h1>
+            <div id="contador-dias"></div>
+            <p class="frase-romantica">"Você é o meu melhor momento todos os dias!"</p>
+        </header>
+        <main>
+            <section>
+                <h2>Nossos Momentos</h2>
+                <div class="galeria">
+    <a href="assets/fotos/foto.png" class="foto-link">
+        <img src="assets/fotos/foto.png" alt="Foto especial">
+    </a>
+    <a href="assets/fotos/foto2.png" class="foto-link">
+        <img src="assets/fotos/foto2.png" alt="Outro momento especial">
+    </a>
+    <a href="assets/fotos/foto3.png" class="foto-link">
+        <img src="assets/fotos/foto3.png" alt="Mais um momento especial">
+    </a>
+    <a href="assets/fotos/foto4.png" class="foto-link">
+        <img src="assets/fotos/foto4.png" alt="Outro momento especial">
+    </a>
+</div>
+<div id="lightbox" style="display:none;">
+    <span id="fechar-lightbox">&times;</span>
+    <img id="img-lightbox" src="" alt="Foto em destaque">
+</div>
+            <section id="envelope-section">
+    <h2>Mensagem</h2>
+    <div id="envelopes-bilhetes">
+        <!-- Envelope 1 -->
+        <div class="envelope-bilhete" style="display: flex;">
+            <div class="envelope-top"></div>
+            <div class="envelope-body">
+                <div class="mensagem-bilhete">Você é meu sorriso favorito 😍</div>
+                <button class="abrir-proximo-btn">Abrir próximo 💌</button>
+                <button class="fechar-envelope-btn">Fechar ✖️</button>
+            </div>
+        </div>
+        <!-- Envelope 2 -->
+        <div class="envelope-bilhete" style="display: none;">
+            <div class="envelope-top"></div>
+            <div class="envelope-body">
+                <div class="mensagem-bilhete">Te amo mais a cada dia 💖</div>
+                <button class="abrir-proximo-btn">Abrir próximo 💌</button>
+                <button class="fechar-envelope-btn">Fechar ✖️</button>
+            </div>
+        </div>
+        <!-- Envelope 3 -->
+        <div class="envelope-bilhete" style="display: none;">
+            <div class="envelope-top"></div>
+            <div class="envelope-body">
+                <div class="mensagem-bilhete">Obrigado por existir na minha vida ✨</div>
+                <button class="abrir-proximo-btn">Abrir próximo 💌</button>
+                <button class="fechar-envelope-btn">Fechar ✖️</button>
+            </div>
+        </div>
+        <!-- Envelope 4 -->
+        <div class="envelope-bilhete" style="display: none;">
+            <div class="envelope-top"></div>
+            <div class="envelope-body">
+                <div class="mensagem-bilhete">Você é meu porto seguro 🥰</div>
+                <button class="abrir-proximo-btn">Abrir envelope final 💖</button>
+                <button class="fechar-envelope-btn">Fechar ✖️</button>
+            </div>
+        </div>
+    </div>
+    <!-- Quiz do Amor -->
+<div id="quiz-envelope" style="display:none;">
+    <div class="envelope-top"></div>
+    <div class="envelope-body">
+        <div class="quiz-pergunta">
+            <p><strong>Quiz do Amor 💘</strong></p>
+            <p>Qual foi o dia do nosso segundo beijo?</p>
+            <input type="text" id="resposta-quiz" placeholder="dd/mm/aaaa" style="text-align:center; font-size:1.1rem; border-radius:8px; border:1px solid #e60073; padding:6px 12px;">
+            <button id="enviar-quiz-btn" style="margin-top:12px;">Responder</button>
+            <button id="dica-quiz-btn" class="btn-rosa" disabled style="margin-top:16px; width: 160px; font-size: 1.1rem; border-radius: 8px; border: none; background: #ff4da6; color: #fff; padding: 10px 0; opacity: 0.7; cursor: not-allowed; transition: opacity 0.3s;">
+    Quero uma dica! (60s)
+</button>
+<div id="dica-quiz-texto" style="display:none; color:#ad0057; margin-top:8px; font-size:1.05rem;"></div>
+            <div id="quiz-feedback" style="color:#e60073; margin-top:8px;"></div>
+        </div>
+    </div>
+</div>
+    <!-- Envelope final -->
+    <div id="envelope-final" style="display: none;">
+        <div class="envelope-top"></div>
+        <div class="envelope-body">
+            <div class="mensagem-principal">
+                <p>🌹 Hoje eu só quero te lembrar o quanto sou grato por ter você na minha vida.<br><br>
+                Você é o meu refúgio nos dias difíceis e a minha risada fácil nos dias bons. Com você, tudo faz mais sentido. Até as coisas mais simples viram momentos especiais só porque você está ali, do meu lado.<br><br>
+                Te amar é leve, é bonito, é real. E mesmo que às vezes eu não saiba colocar tudo em palavras, o que eu sinto por você é enorme — maior do que qualquer texto conseguiria explicar.<br><br>
+                Obrigado por ser você. Por me escolher todos os dias, mesmo quando eu não sou perfeito. Por me amar do jeitinho que eu sou.<br><br>
+                Hoje é Dia dos Namorados, mas eu te amo todos os dias. E quero seguir construindo com você uma história cheia de amor, parceria e sonhos realizados.<br><br>
+                Com todo o meu coração,<br>
+                Te amo.</p>
+            </div>
+            <button id="fechar-envelope-final-btn">Fechar ✖️</button>
+        </div>
+    </div>
+</section>
+<button id="reabrir-envelopes-btn" style="display:none;">
+    <span>💌 Reabrir envelopes</span>
+</button>
+
+<div id="coracoes-confete"></div>
+
+        </main>
+        <footer>
+            <p>Desde 04/09/2024 💖</p>
+            <p class="assinatura">Com amor, Teodoro</p>
+        </footer>
+    </div>
+    <button id="topo-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">⬆️ Voltar ao topo</button>
+    <script src="scripts/main.js"></script>
+</body>
+</html>
