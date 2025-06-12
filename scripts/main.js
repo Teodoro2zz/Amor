@@ -28,9 +28,9 @@ botoesSuspense.addEventListener('mouseleave', function() {
     naoBtn.style.top = '0px';
 });
 
-// Contador de dias juntos
+// Contador de dias juntos (atualiza automaticamente)
 function atualizarContadorDias() {
-    const inicio = new Date(2024, 8, 4);
+    const inicio = new Date(2024, 8, 4); // 04/09/2024 (mês começa do zero)
     const hoje = new Date();
     inicio.setHours(0,0,0,0);
     hoje.setHours(0,0,0,0);
@@ -40,6 +40,7 @@ function atualizarContadorDias() {
         `<span class="dias-juntos">Estamos juntos há <strong>${dias}</strong> dias! 🥰</span>`;
 }
 atualizarContadorDias();
+setInterval(atualizarContadorDias, 60000); // Atualiza a cada minuto
 
 // Lightbox para galeria de fotos
 document.querySelectorAll('.foto-link').forEach(link => {
@@ -124,6 +125,26 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', () => {
             envelopes[idx].style.display = 'none';
             reabrirBtn.style.display = 'block';
+
+            // Mensagem personalizada ao fechar envelope
+            let msg = document.createElement('div');
+            msg.textContent = "Eu te amo minha garota💗";
+            msg.style.position = 'fixed';
+            msg.style.top = '30%';
+            msg.style.left = '50%';
+            msg.style.transform = 'translate(-50%, -50%)';
+            msg.style.background = '#fff';
+            msg.style.color = '#e60073';
+            msg.style.padding = '24px 32px';
+            msg.style.fontSize = '2rem';
+            msg.style.borderRadius = '16px';
+            msg.style.boxShadow = '0 4px 24px #e6007340';
+            msg.style.zIndex = '9999';
+            msg.style.fontFamily = "'Pacifico', cursive, Arial, sans-serif";
+            document.body.appendChild(msg);
+            setTimeout(() => {
+                msg.remove();
+            }, 2500); // some após 2,5 segundos
         });
     });
 
