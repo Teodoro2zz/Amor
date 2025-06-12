@@ -155,11 +155,43 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     if (fecharFinalBtn) {
-        fecharFinalBtn.addEventListener('click', () => {
-            envelopeFinal.style.display = 'none';
-            reabrirBtn.style.display = 'block';
-        });
-    }
+    fecharFinalBtn.addEventListener('click', () => {
+        envelopeFinal.style.display = 'none';
+        reabrirBtn.style.display = 'block';
+
+        // Mostra overlay de amor
+        const overlay = document.getElementById('amor-overlay');
+        const coracoes = document.getElementById('amor-coracoes');
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // trava scroll
+
+        // Remove corações antigos
+        coracoes.innerHTML = '';
+
+        // Função para soltar corações animados
+        function soltarCoracoesAnimados(qtd = 32) {
+            const emojis = ['💗','💖','💘','💝','💞','❤️','💕'];
+            for (let i = 0; i < qtd; i++) {
+                const coracao = document.createElement('span');
+                coracao.className = 'amor-coracao';
+                coracao.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                coracao.style.left = Math.random() * 96 + 'vw';
+                coracao.style.bottom = '-40px';
+                coracao.style.fontSize = (2 + Math.random() * 2.5) + 'rem';
+                coracao.style.animationDelay = (Math.random() * 1.2) + 's';
+                coracoes.appendChild(coracao);
+                setTimeout(() => coracao.remove(), 2200);
+            }
+        }
+        soltarCoracoesAnimados(32);
+
+        // Remove overlay e destrava tela após 2.5s
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 2500);
+    });
+}
 
     if (reabrirBtn) {
         reabrirBtn.addEventListener('click', () => {
