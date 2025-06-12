@@ -28,9 +28,9 @@ botoesSuspense.addEventListener('mouseleave', function() {
     naoBtn.style.top = '0px';
 });
 
-// Contador de dias juntos
+// Contador de dias juntos (atualiza automaticamente)
 function atualizarContadorDias() {
-    const inicio = new Date(2024, 8, 4);
+    const inicio = new Date(2024, 8, 4); // 04/09/2024 (mês começa do zero)
     const hoje = new Date();
     inicio.setHours(0,0,0,0);
     hoje.setHours(0,0,0,0);
@@ -40,6 +40,7 @@ function atualizarContadorDias() {
         `<span class="dias-juntos">Estamos juntos há <strong>${dias}</strong> dias! 🥰</span>`;
 }
 atualizarContadorDias();
+setInterval(atualizarContadorDias, 60000); // Atualiza a cada minuto
 
 // Lightbox para galeria de fotos
 document.querySelectorAll('.foto-link').forEach(link => {
@@ -73,6 +74,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const dicaBtn = document.getElementById('dica-quiz-btn');
     const dicaTexto = document.getElementById('dica-quiz-texto');
     let dicaInterval;
+
+    // BLOQUEIA LETRAS E ADICIONA / AUTOMATICAMENTE NO INPUT DO QUIZ
+    if (respostaQuiz) {
+        respostaQuiz.addEventListener('input', function(e) {
+            let valor = this.value.replace(/\D/g, ''); // só números
+            if (valor.length > 2 && valor.length <= 4) {
+                valor = valor.slice(0,2) + '/' + valor.slice(2);
+            } else if (valor.length > 4) {
+                valor = valor.slice(0,2) + '/' + valor.slice(2,4) + '/' + valor.slice(4,8);
+            }
+            this.value = valor;
+        });
+    }
 
     // Controle dos envelopes
     abrirBtns.forEach((btn, idx) => {
@@ -111,15 +125,73 @@ document.addEventListener('DOMContentLoaded', function() {
         btn.addEventListener('click', () => {
             envelopes[idx].style.display = 'none';
             reabrirBtn.style.display = 'block';
+
+            // Só mostra a mensagem se for o último envelope antes do quiz
+            if (idx === envelopes.length - 1) {
+                let msg = document.createElement('div');
+                msg.textContent = "Eu te amo minha garota💗";
+                msg.style.position = 'fixed';
+                msg.style.top = '80px';
+                msg.style.left = '50%';
+                msg.style.transform = 'translateX(-50%)';
+                msg.style.background = '#fff';
+                msg.style.color = '#e60073';
+                msg.style.padding = '24px 32px';
+                msg.style.fontSize = '2.5rem';
+                msg.style.fontWeight = 'bold';
+                msg.style.borderRadius = '24px';
+                msg.style.boxShadow = '0 8px 32px #e6007340';
+                msg.style.zIndex = '9999';
+                msg.style.fontFamily = "'Pacifico', cursive, Arial, sans-serif";
+                msg.style.textAlign = 'center';
+                msg.style.letterSpacing = '1px';
+                msg.style.border = '3px solid #e60073';
+                document.body.appendChild(msg);
+                setTimeout(() => {
+                    msg.remove();
+                }, 2500);
+            }
         });
     });
 
     if (fecharFinalBtn) {
-        fecharFinalBtn.addEventListener('click', () => {
-            envelopeFinal.style.display = 'none';
-            reabrirBtn.style.display = 'block';
-        });
-    }
+    fecharFinalBtn.addEventListener('click', () => {
+        envelopeFinal.style.display = 'none';
+        reabrirBtn.style.display = 'block';
+
+        // Mostra overlay de amor
+        const overlay = document.getElementById('amor-overlay');
+        const coracoes = document.getElementById('amor-coracoes');
+        overlay.style.display = 'flex';
+        document.body.style.overflow = 'hidden'; // trava scroll
+
+        // Remove corações antigos
+        coracoes.innerHTML = '';
+
+        // Função para soltar corações animados
+        function soltarCoracoesAnimados(qtd = 32) {
+            const emojis = ['💗','💖','💘','💝','💞','❤️','💕'];
+            for (let i = 0; i < qtd; i++) {
+                const coracao = document.createElement('span');
+                coracao.className = 'amor-coracao';
+                coracao.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+                coracao.style.left = Math.random() * 96 + 'vw';
+                coracao.style.bottom = '-40px';
+                coracao.style.fontSize = (2 + Math.random() * 2.5) + 'rem';
+                coracao.style.animationDelay = (Math.random() * 1.2) + 's';
+                coracoes.appendChild(coracao);
+                setTimeout(() => coracao.remove(), 2200);
+            }
+        }
+        soltarCoracoesAnimados(32);
+
+        // Remove overlay e destrava tela após 2.5s
+        setTimeout(() => {
+            overlay.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 2500);
+    });
+}
 
     if (reabrirBtn) {
         reabrirBtn.addEventListener('click', () => {
@@ -144,9 +216,29 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Lógica do quiz
     if (enviarQuizBtn) {
-        enviarQuizBtn.onclick = function() {
+        enviarQuizBtn.onclick = function(event) {
+            if (event) event.preventDefault();
+
+            const resposta = respostaQuiz.value.trim();
+
+            // 1. Impede envio se estiver vazio
+            if (!resposta) {
+                quizFeedback.style.color = "#e60073";
+                quizFeedback.textContent = "Digite uma resposta!";
+                return;
+            }
+
+            // 2. Só aceita números e /
+            const regex = /^\d{2}\/\d{2}\/\d{4}$/;
+            if (!regex.test(resposta)) {
+                quizFeedback.style.color = "#e60073";
+                quizFeedback.textContent = "Formato inválido! Use dd/mm/aaaa.";
+                return;
+            }
+
             const respostaCerta = "24/01/2024";
-            if (respostaQuiz.value.trim() === respostaCerta) {
+            if (resposta === respostaCerta) {
+                quizFeedback.style.color = "#28a745";
                 quizFeedback.textContent = "Acertou! 💖";
                 setTimeout(() => {
                     quizDiv.style.display = 'none';
@@ -156,10 +248,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     quizFeedback.textContent = '';
                 }, 800);
             } else {
-                quizFeedback.textContent = "Errou! 😱";
-                setTimeout(() => {
-                    window.location.reload();
-                }, 1200);
+                quizFeedback.style.color = "#e60073";
+                quizFeedback.textContent = "Errou! 😱 Tente de novo!";
+                respostaQuiz.value = ''; // Limpa o campo ao errar
+                setTimeout(() => { quizFeedback.textContent = ''; }, 5000); // Some a mensagem após 5s
             }
         };
     }
@@ -181,7 +273,4 @@ document.addEventListener('DOMContentLoaded', function() {
             setTimeout(() => coracao.remove(), 3200);
         }
     }
-
-
-        });
- 
+});
