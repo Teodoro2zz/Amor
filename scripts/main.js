@@ -126,25 +126,31 @@ document.addEventListener('DOMContentLoaded', function() {
             envelopes[idx].style.display = 'none';
             reabrirBtn.style.display = 'block';
 
-            // Mensagem personalizada ao fechar envelope
-            let msg = document.createElement('div');
-            msg.textContent = "Eu te amo minha garota💗";
-            msg.style.position = 'fixed';
-            msg.style.top = '30%';
-            msg.style.left = '50%';
-            msg.style.transform = 'translate(-50%, -50%)';
-            msg.style.background = '#fff';
-            msg.style.color = '#e60073';
-            msg.style.padding = '24px 32px';
-            msg.style.fontSize = '2rem';
-            msg.style.borderRadius = '16px';
-            msg.style.boxShadow = '0 4px 24px #e6007340';
-            msg.style.zIndex = '9999';
-            msg.style.fontFamily = "'Pacifico', cursive, Arial, sans-serif";
-            document.body.appendChild(msg);
-            setTimeout(() => {
-                msg.remove();
-            }, 2500); // some após 2,5 segundos
+            // Só mostra a mensagem se for o último envelope antes do quiz
+            if (idx === envelopes.length - 1) {
+                let msg = document.createElement('div');
+                msg.textContent = "Eu te amo minha garota💗";
+                msg.style.position = 'fixed';
+                msg.style.top = '80px';
+                msg.style.left = '50%';
+                msg.style.transform = 'translateX(-50%)';
+                msg.style.background = '#fff';
+                msg.style.color = '#e60073';
+                msg.style.padding = '24px 32px';
+                msg.style.fontSize = '2.5rem';
+                msg.style.fontWeight = 'bold';
+                msg.style.borderRadius = '24px';
+                msg.style.boxShadow = '0 8px 32px #e6007340';
+                msg.style.zIndex = '9999';
+                msg.style.fontFamily = "'Pacifico', cursive, Arial, sans-serif";
+                msg.style.textAlign = 'center';
+                msg.style.letterSpacing = '1px';
+                msg.style.border = '3px solid #e60073';
+                document.body.appendChild(msg);
+                setTimeout(() => {
+                    msg.remove();
+                }, 2500);
+            }
         });
     });
 
