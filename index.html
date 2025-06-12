@@ -164,6 +164,40 @@
         </footer>
     </div>
     <button id="topo-btn" onclick="window.scrollTo({top: 0, behavior: 'smooth'});">⬆️ Voltar ao topo</button>
+    <script>
+    // --- Quiz do Amor: feedback sem recarregar ---
+    document.addEventListener('DOMContentLoaded', function() {
+        const quizBtn = document.getElementById('enviar-quiz-btn');
+        if (quizBtn) {
+            quizBtn.addEventListener('click', function(event) {
+                event.preventDefault(); // Impede o recarregamento da página!
+                const resposta = document.getElementById('resposta-quiz').value.trim();
+                const feedback = document.getElementById('quiz-feedback');
+                const respostaCorreta = "04/09/2024"; // ajuste conforme sua resposta correta
+
+                if (resposta === respostaCorreta) {
+                    feedback.style.color = "#28a745";
+                    feedback.textContent = "Resposta correta! 💖";
+                    setTimeout(() => {
+                        document.getElementById('quiz-envelope').style.display = 'none';
+                        document.getElementById('envelope-final').style.display = 'flex';
+                    }, 1200);
+                } else {
+                    feedback.style.color = "#e60073";
+                    feedback.textContent = "Ops! Resposta errada. Tente de novo! 😅";
+                }
+            });
+        }
+    });
+    </script>
     <script src="scripts/main.js"></script>
+
+    <!-- ...restante do seu HTML... -->
+
+<!-- Overlay de amor -->
+<div id="amor-overlay" style="display:none;">
+    <div id="amor-msg">Eu te amo minha garota💗</div>
+    <div id="amor-coracoes"></div>
+</div>
 </body>
 </html>
